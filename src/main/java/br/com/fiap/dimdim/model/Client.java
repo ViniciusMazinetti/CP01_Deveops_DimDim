@@ -14,20 +14,19 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "T_Client")
-@SequenceGenerator(name = "client", sequenceName = "SQ_T_CLIENT", allocationSize = 1)
 public class Client {
 	
 	@Id
 	@GeneratedValue(generator = "client", strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
+	@NotBlank(message = "Campo obrigatório")
 	private String name;
 	
-	@NotBlank
+	@NotBlank(message = "Campo obrigatório")
 	private String cpf;
 	
-	@NotBlank
+	@NotBlank(message = "Campo obrigatório")
 	@Email(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "E-mail não válido. Favor digitar um e-mail válido.")
 	private String email;
 

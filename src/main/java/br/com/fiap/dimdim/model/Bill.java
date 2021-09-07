@@ -27,10 +27,10 @@ public class Bill {
 	@GeneratedValue(generator = "bill", strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
+	@NotBlank(message = "Campo obrigatório")
 	private float value;
 	
-	@NotBlank
+	@NotBlank (message = "Campo obrigatório")
 	@ManyToOne
 	private Client client;
 	
