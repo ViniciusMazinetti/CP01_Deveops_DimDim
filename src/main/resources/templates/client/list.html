@@ -32,8 +32,8 @@
 	      <td th:text="${client.getCpf}"></td>
 	      <td th:text="${client.getEmail}"></td>
 	      <td>
-	      	<a th:href="@{'/client/update/' + ${client.getId}}" class="btn btn-primary m-3" th:method='post'>Editar</a>
-	      	<a th:href="@{'/client/delete/' + ${client.getId}}" class="btn btn-danger m-3" th:method='post'>Deletar</a>
+	      	<a th:href="@{/client/update/{id}(id=${client.getId})}" class="btn btn-primary m-3">Editar</a>
+	      	<a th:href="@{/client/delete/{id}(id=${client.getId})}" class="btn btn-danger m-3">Deletar</a>
 	      </td>
 	      
 	    </tr>
