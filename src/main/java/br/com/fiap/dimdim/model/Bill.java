@@ -1,19 +1,14 @@
 package br.com.fiap.dimdim.model;
 
-import java.util.Date;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotBlank;
-
-import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Data;
 
@@ -25,20 +20,15 @@ public class Bill {
 	
 	@Id
 	@GeneratedValue(generator = "bill", strategy = GenerationType.IDENTITY)
+	@Column(name = "id_bill")
 	private Long id;
 	
-	@NotBlank(message = "Campo obrigatório")
+	@Column(name = "nr_value")
 	private float value;
 	
-	@NotBlank (message = "Campo obrigatório")
+	
 	@ManyToOne
+	@JoinColumn(name = "id_client")
 	private Client client;
-	
-	@Temporal(TemporalType.DATE)
-	@CreationTimestamp
-	private Date creationDate;
-	
-	@Temporal(TemporalType.DATE)
-	private Date expireDate;
 
 }

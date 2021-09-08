@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import br.com.fiap.dimdim.model.Bill;
+
 import br.com.fiap.dimdim.model.Client;
 import br.com.fiap.dimdim.repository.ClientRepository;
 
