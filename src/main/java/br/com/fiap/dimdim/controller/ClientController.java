@@ -1,17 +1,19 @@
 package br.com.fiap.dimdim.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import br.com.fiap.dimdim.model.Client;
 import br.com.fiap.dimdim.repository.ClientRepository;
@@ -41,21 +43,49 @@ public class ClientController {
         if (result.hasErrors()) {
             return "client/form";
         }
-        clientRepository.save(client);
-        redirect.addFlashAttribute("msg", "Cadastrado");
+        
+        Optional<Client> updateClient = clientRepository.findById(client.getId());
+        if (updateClient.isEmpty()) {
+        	clientRepository.save(client);
+            redirect.addFlashAttribute("msg", "Cadastrado");
+            return "redirect:save";
+        }
+        System.out.println("Entrei aqui");
+        updateClient.get().setId(client.getId());
+        updateClient.get().setName(client.getName());
+        updateClient.get().setEmail(client.getEmail());
+        updateClient.get().setCpf(client.getCpf());
+        clientRepository.save(updateClient.get());
+        redirect.addFlashAttribute("msg", "Atualizado");
         return "redirect:save";
+        
     }
     
-    @PutMapping("/update")
-	public String update(Client client) {
-		clientRepository.save(client);
-		return "client/list";
+    @RequestMapping("/update/{id}")
+	public ModelAndView update(@PathVariable Long id) {
+    	Optional<Client> client = clientRepository.findById(id);
+    	
+    	if(client.isPresent()) {	
+    		ModelAndView modelAndView = new ModelAndView("client/form");
+    		modelAndView.addObject("client", client.get());
+    		return modelAndView;
+    	}
+    	ModelAndView modelAndView = new ModelAndView("client/list");
+		return modelAndView;
 	}
 	
-	@DeleteMapping("/delete")
-	public String delete(Client client) {
-		clientRepository.delete(client);
-		return "client/list";
+	@RequestMapping("/delete/{id}")
+	public RedirectView delete(@PathVariable(value = "id") Long id, RedirectAttributes redirect) {
+		Optional<Client> client = clientRepository.findById(id);
+		System.out.println("Entrei Aqui");
+		if(client.isPresent()) {
+			clientRepository.delete(client.get());
+			redirect.addFlashAttribute("msg", "Excluido");
+			return new RedirectView("/client");
+		}
+		
+		return new RedirectView("/client");
+		
 	}
 
 }
