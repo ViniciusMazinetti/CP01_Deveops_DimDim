@@ -5,9 +5,9 @@
     	rel="stylesheet" 
     	integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Boleto</title>
 </head>
-<body>
+<body class="d-flex justify-content-center align-items-center flex-column">
 
 	<img src="../../img/logo.png">
    <form action="/bill/save" method="post" th:object="${bill}">
@@ -15,7 +15,7 @@
    		
 		<div class="column justify-content-center align-items-center" >
 			<h2>Atualizar boleto</h2>
-			<div class="form-group col-lg-2">
+			<div class="form-group">
 				<label for="client">Pagador</label>
 				<select class="form-control" th:field="*{client.id}">
 	                <option value="0">Selecione</option>
@@ -24,14 +24,14 @@
 	            </select>
 
 			</div>
-			<div class="form-group col-lg-2">
+			<div class="form-group">
 				<label for="value">Valor</label>
 				<input type="number" id="value" class="form-control" th:field="*{value}"/>
 			</div>
 		</div>
-		<input type="submit" value="Atualizar" class="btn btn-primary">
+		<input type="submit" value="Atualizar" class="btn btn-primary m-3">
 		
-		<a href="/bill" class="btn btn-danger">Listar</a>
+		<a href="/bill" class="btn btn-danger m-3">Listar</a>
 		
 	</form>
 

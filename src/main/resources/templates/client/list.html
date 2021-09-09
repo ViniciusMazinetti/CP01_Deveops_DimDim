@@ -11,34 +11,35 @@
 
 	<img src="../img/logo.png">
 	
-	<h2>Clientes</h2>
+	<h2 class="m-3">Clientes</h2>
 	
 	<div th:if="${msg != null}" class="alert alert-success" th:text="${msg}"></div>
-	<a class="btn btn-primary" href="/client/save">Cadastrar novo Cliente</a>
-	
-	<table class="table">
-	  <thead>
-	    <tr>
-	      <th scope="col">Id</th>
-	      <th scope="col">Name</th>
-	      <th scope="col">CPF</th>
-	      <th scope="col">Email</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    <tr th:each="client: ${clients}">
-	      <th scope="row" th:text="${client.getId}"></th>
-	      <td th:text="${client.getName}"></td>
-	      <td th:text="${client.getCpf}"></td>
-	      <td th:text="${client.getEmail}"></td>
-	      <td>
-	      	<a th:href="@{/client/update/{id}(id=${client.getId})}" class="btn btn-primary m-3">Editar</a>
-	      	<a th:href="@{/client/delete/{id}(id=${client.getId})}" class="btn btn-danger m-3">Deletar</a>
-	      </td>
-	      
-	    </tr>
-	  </tbody>
-	</table>
+	<a class="btn btn-primary m-3" href="/client/save">Cadastrar novo Cliente</a>
+	<div class="mx-5">
+		<table class="table table-striped">
+		  <thead>
+		    <tr>
+		      <th scope="col">Id</th>
+		      <th scope="col">Name</th>
+		      <th scope="col">CPF</th>
+		      <th scope="col">Email</th>
+		      <th scope="col">Ação</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr th:each="client: ${clients}">
+		      <th scope="row" th:text="${client.getId}" class="align-middle col-md-2"></th>
+		      <td th:text="${client.getName}" class="align-middle col-md-2"></td>
+		      <td th:text="${client.getCpf}" class="align-middle col-md-2"></td>
+		      <td th:text="${client.getEmail}" class="align-middle col-md-2"></td>
+		      <td class="align-middle col-md-2">
+		      	<a th:href="@{/client/update/{id}(id=${client.getId})}" class="btn btn-primary m-3">Editar</a>
+		      	<a th:href="@{/client/delete/{id}(id=${client.getId})}" class="btn btn-danger m-3">Deletar</a>
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
+	</div>
 	
 	<a th:href="@{/}" class="btn btn-primary m-3">Voltar</a>
 

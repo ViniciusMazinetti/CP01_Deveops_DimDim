@@ -11,32 +11,35 @@
 
 	<img src="../img/logo.png">
 	
-	<h2>Boletos</h2>
+	<h2 class="m-3">Boletos</h2>
 	
 	<div th:if="${msg != null}" class="alert alert-success" th:text="${msg}"></div>
-	<a class="btn btn-primary" href="/bill/save">Cadastrar novo Boleto</a>
+	<a class="btn btn-primary m-3" href="/bill/save">Cadastrar novo Boleto</a>
 	
-	<table class="table">
-	  <thead>
-	    <tr>
-	      <th scope="col">Id</th>
-	      <th scope="col">Pagador</th>
-	      <th scope="col">Valor</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    <tr th:each="bill: ${bills}">
-	      <th scope="row" th:text="${bill.getId}"></th>
-	      <td th:text="${bill.getClient.getName}"></td>
-	      <td th:text="${bill.getValue}"></td>
-	      <td>
-	      	<a th:href="@{/bill/update/{id}(id=${bill.getId})}" class="btn btn-primary m-3" th:method='get'>Editar</a>
-	      	<a th:href="@{/bill/delete/{id}(id=${bill.getId})}" class="btn btn-danger m-3" th:method='get'>Deletar</a>
-	      </td>
-	      
-	    </tr>
-	  </tbody>
-	</table>
+	<div class="mx-5">
+		<table class="table table-striped">
+		  <thead>
+		    <tr>
+		      <th scope="col">Id</th>
+		      <th scope="col">Pagador</th>
+		      <th scope="col">Valor</th>
+		      <th scope="col">Ação</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr th:each="bill: ${bills}">
+		      <th scope="row" th:text="${bill.getId}" class="align-middle col-md-2"></th>
+		      <td th:text="${bill.getClient.getName}" class="align-middle col-md-2"></td>
+		      <td th:text="${bill.getValue}" class="align-middle col-md-2"></td>
+		      <td class="align-middle col-md-2">
+		      	<a th:href="@{/bill/update/{id}(id=${bill.getId})}" class="btn btn-primary m-3" th:method='get'>Editar</a>
+		      	<a th:href="@{/bill/delete/{id}(id=${bill.getId})}" class="btn btn-danger m-3" th:method='get'>Deletar</a>
+		      </td>
+		      
+		    </tr>
+		  </tbody>
+		</table>
+	</div>
 	
 	<a th:href="@{/}" class="btn btn-primary m-3">Voltar</a>
 

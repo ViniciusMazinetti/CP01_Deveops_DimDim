@@ -7,25 +7,25 @@
     <meta charset="UTF-8">
     <title>Dim Dim</title>
 </head>
-<body>
+<body class="d-flex justify-content-center align-items-center flex-column">
 	<img src="../img/logo.png">
     <h1>Cadastro de Cliente</h1>
     <div th:if="${msg != null}" class="alert alert-success" th:text="${msg}"></div>
     <form action="/client/save" method="post" th:object="${client}">
-        <div class="form-group col-lg-2">
+        <div class="form-group">
             <label for="name">Nome</label>
             <input type="text" name="name" th:field="*{name}" class="form-control" >
         </div>
-        <div class="form-group col-lg-2">
+        <div class="form-group ">
             <label for="cpf" >CPF</label>
             <input type="text" name="cpf" th:field="*{cpf}" class="form-control" >
         </div>
-        <div class="form-group col-lg-2">
+        <div class="form-group ">
             <label for="email" >Email</label>
             <input type="text" name="email" th:field="*{email}" class="form-control" >
         </div>
-        <input type="submit" value="Cadastrar" class="btn btn-primary">
-        <a href="/client" class="btn btn-danger">Listar</a>
+        <input type="submit" value="Cadastrar" class="btn btn-primary m-3">
+        <a href="/client" class="btn btn-danger m-3">Listar</a>
     </form>
 
 	
